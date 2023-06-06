@@ -1,7 +1,6 @@
 """
 To render html web pages
 """
-
 from django.http import HttpResponse
 
 HTML_STRING = """
