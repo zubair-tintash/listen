@@ -1,5 +1,8 @@
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.db import models
+
+
+User = get_user_model()
 
 
 class SongsQuerySet(models.QuerySet):
@@ -13,9 +16,9 @@ class SongsManager(models.Manager):
 
 # Create your models here.
 class Song(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    name = models.TextField()
-    artist = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    artist = models.CharField(max_length=255)
     tags = models.TextField(null=True)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)

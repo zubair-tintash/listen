@@ -1,7 +1,10 @@
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.db import models
 
 from songs.models import Song
+
+
+User = get_user_model()
 
 
 class CommentsQuerySet(models.QuerySet):
@@ -15,16 +18,16 @@ class CommentsManager(models.Manager):
 
 # Create your models here.
 class Comment(models.Model):
+    name = models.CharField(max_length=255)
     content = models.TextField()
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE, related_name="comments")
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     objects = CommentsManager()
 
     def __str__(self):
-        return str(self.content)[:100]
+        return f"{self.song.name} - {self.name}"
 
     class Meta:
         verbose_name = "Comment"

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # local
     "accounts",
     "songs",
+    "comments",
+    "albums",
 ]
 
 MIDDLEWARE = [
