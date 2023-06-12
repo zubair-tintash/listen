@@ -12,7 +12,7 @@ class SongsManager(models.Manager):
 
 
 # Create your models here.
-class Songs(models.Model):
+class Song(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.TextField()
     artist = models.TextField()

@@ -5,7 +5,7 @@ from rest_framework import mixins
 from rest_framework import permissions
 
 from .serializers import SongsSerializer
-from songs.models import Songs
+from songs.models import Song
 
 
 def is_json(json_data):
@@ -19,7 +19,7 @@ def is_json(json_data):
 class SongsAPIDetailView(mixins.UpdateModelMixin, generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = SongsSerializer
-    queryset = Songs.objects.all()
+    queryset = Song.objects.all()
     lookup_field = "id"
 
     def put(self, request, *args, **kwargs):
@@ -37,7 +37,7 @@ class SongsAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     serializer_class = SongsSerializer
     passed_id = None
     search_fields = ("name", "tags")
-    queryset = Songs.objects.all()
+    queryset = Song.objects.all()
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)

@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from .models import Albums
+from .models import Album
 
 
 class AlbumsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Albums
+        model = Album
         fields = ["name", "private", "user"]

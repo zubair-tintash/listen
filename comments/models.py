@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from songs.models import Songs
+from songs.models import Song
 
 
 class CommentsQuerySet(models.QuerySet):
@@ -14,10 +14,10 @@ class CommentsManager(models.Manager):
 
 
 # Create your models here.
-class Comments(models.Model):
+class Comment(models.Model):
     content = models.TextField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    song = models.ForeignKey(Songs, on_delete=models.CASCADE)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
