@@ -6,7 +6,11 @@ REST_FRAMEWORK = {
         "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ),
+    "DEFAULT_FILTER_BACKENDS": ("rest_framework.filters.SearchFilter",),
+    "SEARCH_PARAM": "search",
 }
 
 JWT_AUTH = {
