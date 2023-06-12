@@ -18,11 +18,12 @@ class SongsManager(models.Manager):
 
 # Create your models here.
 class Song(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     artist = models.CharField(max_length=255)
     tags = models.TextField(null=True)
     albums = models.ManyToManyField(Album, related_name="songs")
+    likes = models.ManyToManyField(User, related_name="likes")
+    favorites = models.ManyToManyField(User, related_name="favorites")
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 

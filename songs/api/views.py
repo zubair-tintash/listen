@@ -1,19 +1,9 @@
-import json
-
 from rest_framework import generics
 from rest_framework import mixins
 from rest_framework import permissions
 
 from .serializers import SongsSerializer
 from songs.models import Song
-
-
-def is_json(json_data):
-    try:
-        json.loads(json_data)
-        return True
-    except ValueError:
-        return False
 
 
 class SongsAPIDetailView(mixins.UpdateModelMixin, generics.RetrieveAPIView):
