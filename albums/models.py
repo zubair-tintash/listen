@@ -1,7 +1,8 @@
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.db import models
 
-from songs.models import Song
+
+User = get_user_model()
 
 
 class AlbumsQuerySet(models.QuerySet):
@@ -17,8 +18,7 @@ class AlbumsManager(models.Manager):
 class Album(models.Model):
     name = models.TextField()
     private = models.BooleanField()
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    songs = models.ForeignKey(Song, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 

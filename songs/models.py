@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from albums.models import Album
+
 
 User = get_user_model()
 
@@ -20,6 +22,7 @@ class Song(models.Model):
     name = models.CharField(max_length=255)
     artist = models.CharField(max_length=255)
     tags = models.TextField(null=True)
+    albums = models.ManyToManyField(Album, related_name="songs")
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 

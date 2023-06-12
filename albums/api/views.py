@@ -1,25 +1,15 @@
-import json
-
 from rest_framework import generics
 from rest_framework import mixins
 from rest_framework import permissions
 
-from .serializers import SongsSerializer
-from songs.models import Song
+from .serializers import AlbumsSerializer
+from albums.models import Album
 
 
-def is_json(json_data):
-    try:
-        json.loads(json_data)
-        return True
-    except ValueError:
-        return False
-
-
-class SongsAPIDetailView(mixins.UpdateModelMixin, generics.RetrieveAPIView):
+class AlbumsAPIDetailView(mixins.UpdateModelMixin, generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    serializer_class = SongsSerializer
-    queryset = Song.objects.all()
+    serializer_class = AlbumsSerializer
+    queryset = Album.objects.all()
     lookup_field = "id"
 
     def put(self, request, *args, **kwargs):
@@ -32,12 +22,12 @@ class SongsAPIDetailView(mixins.UpdateModelMixin, generics.RetrieveAPIView):
         serializer.save(updated_by_user=self.request.user)
 
 
-class SongsAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+class AlbumsAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    serializer_class = SongsSerializer
+    serializer_class = AlbumsSerializer
     passed_id = None
-    search_fields = ("name", "tags", "albums")
-    queryset = Song.objects.all()
+    search_fields = ("name", "private", "user")
+    queryset = Album.objects.all()
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)

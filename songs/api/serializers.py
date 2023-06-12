@@ -10,8 +10,8 @@ class SongsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Song
-        fields = ["name", "artist", "tags", "timestamp", "comments"]
-        read_only_fields = ["user"]
+        fields = ["name", "artist", "tags", "albums", "timestamp", "comments"]
+        read_only_fields = ["user", "albums"]
 
     def get_comments(self, obj):
         comments = Comment.objects.filter(song_id=obj.id)
