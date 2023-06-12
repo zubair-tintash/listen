@@ -17,7 +17,7 @@ class AlbumsManager(models.Manager):
 # Create your models here.
 class Album(models.Model):
     name = models.TextField()
-    private = models.BooleanField()
+    private = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)

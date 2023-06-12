@@ -49,33 +49,3 @@ class RegisterAPIView(generics.CreateAPIView):
 
     def get_serializer_context(self, *args, **kwargs):
         return {"request": self.request}
-
-
-# class RegisterAPIView(APIView):
-#     permission_classes = [permissions.AllowAny]
-#
-#     def post(self, request, *args, **kwargs):
-#         if request.user.is_authenticated():
-#             return Response({'detail': 'You are already registered and authenticated'}, status=400)
-#         data = request.data
-#         username = data.get('username')
-#         email = data.get('email')
-#         password = data.get('passwprd')
-#         password2 = data.get('passwprd2')
-#
-#         qs = User.objects.filter(
-#             Q(username__iexact=username) |
-#             Q(email__iexact=username)
-#         )
-#
-#         if password != password2:
-#             return Response({'detail': 'Password must match'}, status=401)
-#
-#         if qs.exists():
-#             return Response({'detail': 'This user already exists'}, status=401)
-#         else:
-#             user = User.objects.create(username=username, email=email)
-#             user.set_password(password)
-#             user.save()
-#             return Response({'detail': 'Registered. Please verify your email'}, status=201)
-#         # return Response({'detail': 'Invalid Request'}, status=400)

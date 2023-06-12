@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AnonymousUser
 from rest_framework import generics
 from rest_framework import mixins
 from rest_framework import permissions
@@ -27,7 +28,15 @@ class AlbumsAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     serializer_class = AlbumsSerializer
     passed_id = None
     search_fields = ("name", "private", "user")
-    queryset = Album.objects.all()
+
+    def get_queryset(self):
+        albums = Album.objects.filter(private=False)
+        if not isinstance(self.request.user, AnonymousUser):
+            private_user_albums = Album.objects.filter(
+                private=True, user=self.request.user
+            )
+            return albums | private_user_albums
+        return albums
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
