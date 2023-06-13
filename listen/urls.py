@@ -24,4 +24,5 @@ urlpatterns = [
     url(r"^api/songs/", include("songs.api.urls")),
     url(r"^api/comments/", include("comments.api.urls")),
     url(r"^api/albums/", include("albums.api.urls")),
+    url(r"^api/notifications/", include("notifications.api.urls")),
 ]
