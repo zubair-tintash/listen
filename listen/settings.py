@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "songs",
     "comments",
     "albums",
+    "notifications",
 ]
 
 MIDDLEWARE = [
